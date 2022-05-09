@@ -34,14 +34,16 @@ class Solution:
         """
         n = len(nums)
         left = right = 0
-        while right < n:
-            if nums[right] != 0:
+
+        # 如果不是0，left和right都+1，交换等于没交换，如果是0，right+1,left还指向0，可以交换，
+        # 如果有多个零，left停在第一个零，right停在第一个非零
+        for i in range(n):
+            if nums[i] != 0:
+                #交换为什么写在这个位置呢？
                 nums[left], nums[right] = nums[right], nums[left]
                 left += 1
             right += 1
-
-
-
+        print(nums)
 
 
 # leetcode submit region end(Prohibit modification and deletion)
@@ -49,4 +51,4 @@ class Solution:
 
 if __name__ == '__main__':
     a = Solution()
-    a.moveZeroes([1,2,3,4])
+    a.moveZeroes([1, 2, 0, 3, 4])

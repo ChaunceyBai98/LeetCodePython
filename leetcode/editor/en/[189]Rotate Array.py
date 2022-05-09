@@ -47,7 +47,7 @@ from typing import List
 
 # leetcode submit region begin(Prohibit modification and deletion)
 class Solution:
-    #https://blog.csdn.net/weixin_46813313/article/details/113696218
+    #https://blog.nowcoder.net/n/a1d6a8d3422f45fdbd68647c029cc897?from=nowcoder_improve
     def rotate(self, nums: List[int], k: int) -> None:
         """
         Do not return anything, modify nums in-place instead.

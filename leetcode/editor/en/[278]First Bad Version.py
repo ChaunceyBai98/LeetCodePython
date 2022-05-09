@@ -46,35 +46,24 @@ from typing import List
 # def isBadVersion(version: int) -> bool:
 
 class Solution:
+
     def firstBadVersion(self, n: int) -> int:
         # left = 1
         # right = n
-        low, high = 0, n+1
-        while low < high - 1:
-            mid = (high - low) // 2 + low
-            if isBadVersion(mid):
-                high = mid
+        left, right = 0, n + 1
+        while left < right - 1:
+            mid = left + (right - left)//2
+            if(isBadVersion(mid)):
+                right = mid
             else:
-                low = mid
-        return high
-        # findSeperation = False
-        # while not findSeperation:
-        #     middle = int(left+(right-left)/2)
-        #     isMiddleBad = isBadVersion(middle)
-        #     if isMiddleBad :
-        #         right = middle - 1
-        #         findSeperation = not isBadVersion(right)
-        #         if(findSeperation):
-        #             return right + 1
-        #     else:
-        #         left = middle + 1
-        #         findSeperation = isBadVersion(left)
-        #         if(findSeperation):
-        #             return left
+                left = mid
+        return right
+
 
 
 # leetcode submit region end(Prohibit modification and deletion)
-
+def isBadVersion(self,a):
+    pass
 
 if __name__ == '__main__':
     a = Solution()
