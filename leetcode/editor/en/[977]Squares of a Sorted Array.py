@@ -39,17 +39,16 @@ from typing import List
 class Solution:
     def sortedSquares(self, nums: List[int]) -> List[int]:
         n = len(nums)
-        left, right, np = 0, n - 1, n - 1
+        left, right, newP = 0, n - 1, n - 1
         ans = [0] * n
         while left <= right:
             if nums[left] * nums[left] < nums[right] * nums[right]:
-                ans[np] = nums[right] * nums[right]
+                ans[newP] = nums[right] * nums[right]
                 right -= 1
-
             else:
-                ans[np] = nums[left] * nums[left]
+                ans[newP] = nums[left] * nums[left]
                 left += 1
-            np -= 1
+            newP -= 1
         return ans
 
 
