@@ -95,7 +95,7 @@ class Solution:
                 l += 1
             # 小的挪到右边
             nums[r] = nums[l]
-            # l在的位置就是pivot应该在的位置
+        # l在的位置就是pivot应该在的位置
         nums[l] = pivot
         return l
 
