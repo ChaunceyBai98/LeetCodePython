@@ -48,7 +48,7 @@ from dataStructure.ListNode import ListNode
 
 # leetcode submit region begin(Prohibit modification and deletion)
 class Solution:
-    # 我自己的，超时了
+    # 我自己的，超时了，原因是要回退来判断是否超时
     # def removeDuplicates(self, s: str, k: int) -> str:
     #     stack = []
     #     for c in s:
