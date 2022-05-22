@@ -43,7 +43,7 @@
 #  
 #  1 <= s.length <= 10⁵ 
 #  s[i] is either'(' , ')', or lowercase English letter. 
-#  
+#
 #  Related Topics String Stack 👍 4801 👎 82
 
 from typing import List, Optional
@@ -53,6 +53,7 @@ from dataStructure.ListNode import ListNode
 # leetcode submit region begin(Prohibit modification and deletion)
 class Solution:
     def minRemoveToMakeValid(self, s: str) -> str:
+        global j
         stack = []
         i = 0
         for c in s:
