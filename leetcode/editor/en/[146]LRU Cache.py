@@ -64,7 +64,7 @@ class DLinkedNode:
 
 
 class LRUCache:
-
+    # hashmap 管检索， 双向链表管抛弃谁
     def __init__(self, capacity: int):
         self.cache = {}
         self.head = DLinkedNode()
