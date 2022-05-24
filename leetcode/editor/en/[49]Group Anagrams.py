@@ -32,14 +32,13 @@ from dataStructure.ListNode import ListNode
 # leetcode submit region begin(Prohibit modification and deletion)
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        map = collections.defaultdict(list)
+        mp = collections.defaultdict(list)
         for str in strs:
             counts = [0] * 26
             for ch in str:
                 counts[ord(ch) - ord('a')] += 1
-            # 需要将 list 转换成 tuple 才能进行哈希
-            map[tuple(counts)].append(str)
-        return list(map.values())
+            mp[tuple(counts)].append(str)
+        return list(mp.values())
 
 
 # leetcode submit region end(Prohibit modification and deletion)
