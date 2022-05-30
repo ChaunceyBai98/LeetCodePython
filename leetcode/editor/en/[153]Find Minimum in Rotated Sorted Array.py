@@ -58,6 +58,7 @@ from dataStructure.ListNode import ListNode
 
 
 # leetcode submit region begin(Prohibit modification and deletion)
+# 基于一个观察：当且仅当nums[mid]>nums[hi]时，最小值在右侧
 class Solution:
     def findMin(self, nums: List[int]) -> int:
         lo, hi = 0, len(nums) - 1
