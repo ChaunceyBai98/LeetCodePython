@@ -50,7 +50,7 @@ class Solution:
     def firstBadVersion(self, n: int) -> int:
         # left = 1
         # right = n
-        left, right = 0, n + 1
+        left, right = -1, n + 1
         while left < right - 1:
             mid = left + (right - left)//2
             if(isBadVersion(mid)):
