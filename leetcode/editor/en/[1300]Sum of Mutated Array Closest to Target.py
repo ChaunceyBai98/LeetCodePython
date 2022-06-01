@@ -54,19 +54,18 @@ class Solution:
         prefix = [0]
         for num in arr:
             prefix.append(prefix[-1] + num)
-        # l:0,r:数组里的最大值,ans:-1
-        l, r, ans = 0, max(arr), -1
-        while l <= r:
-            mid = (l + r) // 2
+        # l:0,r:数组里的最大值
+        l, r = -1, max(arr) + 1
+        while l < r - 1:
+            mid = l + (r - l) // 2
             # it 之前的数比mid小, it包括之后的数比mid大
             it = bisect.bisect_left(arr, mid)
             # 前面数的和 + 后面数都变成mid的和
             curSum = prefix[it] + (n - it) * mid
             if curSum <= target:
-                ans = mid
-                l = mid + 1
+                l = mid
             else:
-                r = mid - 1
+                r = mid
 
         # 计算修改后的结果
         def check(x):
@@ -80,9 +79,9 @@ class Solution:
             # return sum
             return sum(x if num >= x else num for num in arr)
 
-        choose_small = check(ans)
-        choose_big = check(ans + 1)
-        return ans if abs(choose_small - target) <= abs(choose_big - target) else ans + 1
+        choose_small = check(l)
+        choose_big = check(r)
+        return l if abs(choose_small - target) <= abs(choose_big - target) else r
 
 
 # leetcode submit region end(Prohibit modification and deletion)
