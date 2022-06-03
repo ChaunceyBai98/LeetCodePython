@@ -40,37 +40,29 @@ import sys
 class Solution:
     def threeSumClosest(self, nums: List[int], target: int) -> int:
         nums.sort()
-        n = len(nums)
-        ans = sys.maxsize
+        nlen = len(nums)
+        ans = 10000000
 
-        # 根据差值的绝对值来更新答案
-        def update(cur):
-            nonlocal ans
-            if abs(cur - target) < abs(ans - target):
-                ans = cur
+        def updateAns(curSum: int, ans: int)->int:
+            if abs(curSum - target) < abs(ans - target):
+                ans = curSum
+            return ans
 
-        for i in range(n):
-            # 保证和上一次枚举的元素不相等
-            if i > 0 and nums[i] == nums[i - 1]:
-                continue
-            # 使用双指针枚举 b 和 c
-            l, r = i + 1, n - 1
-            while l < r:
-                sum = nums[i] + nums[l] + nums[r]
-                # 如果和为 target 直接返回答案
-                if sum == target:
-                    return target
-                # 每次都要更新
-                update(sum)
-                if sum > target:
-                    while l < r and nums[r - 1] == nums[r]:
-                        r -= 1
-                    r -= 1
+        for i in range(nlen - 2):
+            if nums[i] > target / 3:
+                ans = updateAns(nums[i] + nums[i + 1] + nums[i + 2], ans)
+                break
+            start = i + 1
+            end = nlen - 1
+            while start < end:
+                curSum = nums[i] + nums[start] + nums[end]
+                ans = updateAns(curSum, ans)
+                if curSum == target:
+                    return curSum
+                elif curSum < target:
+                    start += 1
                 else:
-                    while l < r and nums[l] == nums[l + 1]:
-                        l += 1
-                    l += 1
-
+                    end -= 1
         return ans
 
 
@@ -80,3 +72,6 @@ class Solution:
 if __name__ == '__main__':
     a = Solution()
     print(a.threeSumClosest([11, 1, 1], 123))
+    print(a.threeSumClosest(nums = [-1,2,1,-4], target = 1))
+    print(a.threeSumClosest(nums = [0,0,0], target = 1))
+    print(a.threeSumClosest([1, 1, 1, 1], 0))

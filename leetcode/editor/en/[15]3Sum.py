@@ -31,27 +31,37 @@ class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
         nums.sort()
         res = []
-        for i in range(len(nums)):
+        nlen = len(nums)
+        for i in range(nlen):
             if nums[i] > 0:
                 break
             # find the first one of duplicates
             if i > 0 and nums[i] == nums[i - 1]:
                 continue
-            l, r = i + 1, len(nums) - 1
-            while l < r:
-                if nums[i] + nums[l] + nums[r] == 0:
-                    res.append([nums[i], nums[l], nums[r]])
-                    # avoid duplicate answer after finding an answer
-                    while l < r and nums[l] == nums[l + 1]:
-                        l += 1
-                    while l < r and nums[r] == nums[r - 1]:
-                        r -= 1
-                    l += 1
-                    r -= 1
-                elif nums[i] + nums[l] + nums[r] < 0:
-                    l += 1
-                else:
-                    r -= 1
+            resOf2 = self.twoSum(nums, i + 1, nlen - 1, -nums[i])
+            if resOf2:
+                for ele in resOf2:
+                    res.append([nums[i], ele[0], ele[1]])
+        return res
+
+    def twoSum(self, nums: List[int], start: int, end: int, target) -> list[list[int]]:
+        res = []
+        # nums是有序的
+        while start < end:
+            if nums[start] > target / 2:
+                return res
+            if nums[start] + nums[end] == target:
+                res.append([nums[start], nums[end]])
+                while start < end and nums[start] == nums[start + 1]:
+                    start += 1
+                while start < end and nums[end] == nums[end - 1]:
+                    end -= 1
+                start += 1
+                end -= 1
+            elif nums[start] + nums[end] < target:
+                start += 1
+            else:
+                end -= 1
         return res
 
 
@@ -60,4 +70,4 @@ class Solution:
 
 if __name__ == '__main__':
     a = Solution()
-    print(a.threeSum([-4,-2,1,-5,-4,-4,4,-2,0,4,0,-2,3,1,-5,0]))
+    print(a.threeSum([-1,0,1,2,-1,-4]))
