@@ -49,14 +49,32 @@ from dataStructure.ListNode import ListNode
 
 # leetcode submit region begin(Prohibit modification and deletion)
 class Solution:
+    # hashmap
+    # def twoSum(self, nums: List[int], target: int) -> List[int]:
+    #     map = {}
+    #     for i in range(len(nums)):
+    #         if map.get(nums[i]) is not None:
+    #             return [i, map.get(nums[i])]
+    #         else:
+    #             map.setdefault(target - nums[i],i)
+    #     return []
+    # 双指针
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        map = {}
-        for i in range(len(nums)):
-            if map.get(nums[i]) is not None:
-                return [i, map.get(nums[i])]
+        ans = []
+        Nnums = nums.copy()
+        nums.sort()
+        left, right = 0, len(nums) - 1
+        while left < right:
+            if nums[left] + nums[right] == target:
+                for i in range(len(Nnums)):
+                    if Nnums[i] == nums[left] or Nnums[i] == nums[right]:
+                        ans.append(i)
+                return ans
+            elif nums[left] + nums[right] < target:
+                left += 1
             else:
-                map.setdefault(target - nums[i],i)
-        return []
+                right -= 1
+        return ans
 
 
 # leetcode submit region end(Prohibit modification and deletion)
