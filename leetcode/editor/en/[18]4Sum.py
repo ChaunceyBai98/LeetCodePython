@@ -40,45 +40,56 @@ from typing import List
 # leetcode submit region begin(Prohibit modification and deletion)
 class Solution:
     def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
-        quadruplets = list()
-        if not nums or len(nums) < 4:
-            return quadruplets
-
+        ans = []
         nums.sort()
-        length = len(nums)
-        for i in range(length - 3):
-            if i > 0 and nums[i] == nums[i - 1]:
-                continue
-            if nums[i] + nums[i + 1] + nums[i + 2] + nums[i + 3] > target:
-                break
-            if nums[i] + nums[length - 3] + nums[length - 2] + nums[length - 1] < target:
-                continue
-            for j in range(i + 1, length - 2):
-                if j > i + 1 and nums[j] == nums[j - 1]:
-                    continue
-                if nums[i] + nums[j] + nums[j + 1] + nums[j + 2] > target:
+        nlen = len(nums)
+        first = 0
+        while first < nlen - 3:
+            if nums[first] > target / 4:
+                return ans
+            second = first + 1
+            while second < nlen - 2:
+                if nums[second] > (target - nums[first]) / 3:
                     break
-                if nums[i] + nums[j] + nums[length - 2] + nums[length - 1] < target:
-                    continue
-                left, right = j + 1, length - 1
-                while left < right:
-                    total = nums[i] + nums[j] + nums[left] + nums[right]
-                    if total == target:
-                        quadruplets.append([nums[i], nums[j], nums[left], nums[right]])
-                        while left < right and nums[left] == nums[left + 1]:
-                            left += 1
-                        left += 1
-                        while left < right and nums[right] == nums[right - 1]:
-                            right -= 1
-                        right -= 1
-                    elif total < target:
-                        left += 1
-                    else:
-                        right -= 1
+                ansOf2 = self.twoSum(nums, second + 1, nlen - 1, target - nums[first] - nums[second])
+                if ansOf2:
+                    for ele in ansOf2:
+                        ans.append([nums[first], nums[second], ele[0], ele[1]])
+                    while second < nlen - 2 and nums[second] == nums[second + 1]:
+                        second += 1
+                    second += 1
+                else:
+                    second += 1
+            while first < nlen - 3 and nums[first] == nums[first + 1]:
+                first += 1
+            first += 1
+        return ans
 
-        return quadruplets
+    def twoSum(self, nums: List[int], start: int, end: int, target: int) -> List[List[int]]:
+        ans = []
+        while start < end:
+            if nums[start] > target / 2:
+                return ans
+            if nums[start] + nums[end] == target:
+                ans.append([nums[start], nums[end]])
+                while start < end and nums[start] == nums[start + 1]:
+                    start += 1
+                while start < end and nums[end] == nums[end - 1]:
+                    end -= 1
+                start += 1
+                end -= 1
+            elif nums[start] + nums[end] < target:
+                start += 1
+            else:
+                end -= 1
+        return ans
+
+
 # leetcode submit region end(Prohibit modification and deletion)
 
 
 if __name__ == '__main__':
     a = Solution()
+    print(a.twoSum([1, 1], 0, 1, 2))
+    print(a.fourSum([1, 1, 2, 3, 4, 5, 6], 7))
+    print(a.fourSum([-3, -1, 0, 2, 4, 5], 1))
