@@ -47,20 +47,22 @@ from typing import List
 # leetcode submit region begin(Prohibit modification and deletion)
 class Solution:
     def maxArea(self, height: List[int]) -> int:
-        l, r = 0, len(height) - 1
-        maxArea = 0
+        hlen = len(height)
+        max = 0
+        l, r = 0, hlen - 1
         while l < r:
-            curArea = min(height[l], height[r]) * (r - l)
-            maxArea = max(maxArea, curArea)
+            cur = min(height[l], height[r]) * (r - l)
+            if cur > max:
+                max = cur
             if height[l] < height[r]:
                 l += 1
             else:
                 r -= 1
-        return maxArea
+        return max
 
 
 # leetcode submit region end(Prohibit modification and deletion)
 if __name__ == '__main__':
     a = Solution()
-    b = [1,8,6,2,5,4,8,3,7]
-    print(a.maxArea(b))
+    print(a.maxArea([1, 8, 6, 2, 5, 4, 8, 3, 7]))
+    print(a.maxArea([1, 1]))
