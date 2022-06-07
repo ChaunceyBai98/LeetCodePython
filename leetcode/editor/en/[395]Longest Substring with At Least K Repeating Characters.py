@@ -34,7 +34,7 @@
 from typing import List, Optional
 from dataStructure.ListNode import ListNode
 
-
+# 没用双指针，因为双指针有点难理解
 # leetcode submit region begin(Prohibit modification and deletion)
 class Solution:
     # 这代码太牛逼了
