@@ -28,22 +28,33 @@ from typing import List
 
 # leetcode submit region begin(Prohibit modification and deletion)
 class Solution:
+    # 自己的版本，稍微提升了一点效率
+    # def moveZeroes(self, nums: List[int]) -> None:
+    #     l, r = 0, 0
+    #     nlen = len(nums)
+    #     while l < nlen and nums[l] != 0:
+    #         l += 1
+    #     r = l
+    #     while r < nlen:
+    #         while l < nlen and nums[l] != 0:
+    #             l += 1
+    #         while r < nlen and nums[r] == 0:
+    #             r += 1
+    #         if r == nlen - 1 and nums[r] == 0 or r == nlen:
+    #             break
+    #         else:
+    #             nums[l], nums[r] = nums[r], nums[l]
+    #     # print(nums)
+
+    #答案这么写没问题，但是我不理解为什么可以把代码写成这样？
     def moveZeroes(self, nums: List[int]) -> None:
-        """
-        Do not return anything, modify nums in-place instead.
-        """
         n = len(nums)
         left = right = 0
-
-        # 如果不是0，left和right都+1，交换等于没交换，如果是0，right+1,left还指向0，可以交换，
-        # 如果有多个零，left停在第一个零，right停在第一个非零
-        for i in range(n):
-            if nums[i] != 0:
-                #交换为什么写在这个位置呢？
+        while right < n:
+            if nums[right] != 0:
                 nums[left], nums[right] = nums[right], nums[left]
                 left += 1
             right += 1
-        print(nums)
 
 
 # leetcode submit region end(Prohibit modification and deletion)
@@ -52,3 +63,6 @@ class Solution:
 if __name__ == '__main__':
     a = Solution()
     a.moveZeroes([1, 2, 0, 3, 4])
+    a.moveZeroes([0, 1, 0, 3, 12])
+    a.moveZeroes([0])
+    a.moveZeroes([1])
